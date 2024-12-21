@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 25% 97%;
+    --foreground: 220 45% 15%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 220 45% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 45% 15%;
+    
+    --primary: 250 95% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 220 25% 95%;
+    --secondary-foreground: 220 45% 15%;
+    
+    --muted: 220 25% 95%;
+    --muted-foreground: 220 35% 45%;
+    
+    --accent: 250 95% 97%;
+    --accent-foreground: 250 95% 60%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 25% 92%;
+    --input: 220 25% 92%;
+    --ring: 250 95% 60%;
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-gradient-to-br from-background via-background to-accent;
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+}
+
+/* Smooth animations */
+.calendar-day {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.calendar-day::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  border-radius: inherit;
+}
+
+.calendar-day:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px -2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-day:hover::after {
+  opacity: 1;
+}
+
+/* Modern gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, 
+    hsl(250 95% 60%), 
+    hsl(280 95% 55%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 8px 32px -4px rgba(0, 0, 0, 0.1),
+    0 4px 16px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  width: 50%;
+  height: 100%;
+  top: 0;
+  transform: skewX(-20deg);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
